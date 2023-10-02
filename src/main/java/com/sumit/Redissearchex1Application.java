@@ -40,9 +40,6 @@ public class Redissearchex1Application implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		// Delete all existing orders and the index
-
-
 		orderRepo.deleteAll();
 		try {
 			jedis.ftDropIndex("order-idx");
@@ -51,10 +48,8 @@ public class Redissearchex1Application implements ApplicationRunner {
 		}
 
 
-		// Read the order data from the JSON file
 		String data = new String(resourceFile.getInputStream().readAllBytes());
 
-		// Deserialize the JSON data into an array of OrderData objects
 		ObjectMapper objectMapper = new ObjectMapper()
 				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
