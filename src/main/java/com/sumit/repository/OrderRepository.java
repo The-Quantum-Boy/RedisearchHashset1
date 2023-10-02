@@ -27,8 +27,8 @@ public class OrderRepository {
 
     public Order save(Order order) {
         Gson gson = new Gson();
-        String hashKey = "orders";  // Redis hash key to store all orders
-        String fieldKey = "order:" + order.getInternalOrdNo();  // Field key for each order
+        String hashKey = "orders"; 
+        String fieldKey = "order:" + order.getInternalOrdNo();  
         jedis.hset(hashKey, fieldKey, gson.toJson(order));
         jedis.sadd("order", fieldKey);
 
